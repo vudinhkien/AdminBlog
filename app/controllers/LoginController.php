@@ -19,7 +19,7 @@ class LoginController extends BaseController {
 	   $this->logged = true;
 	   $this->user   = $user;
 	}
-
+	
 	public function check() {
 		return $this->logged;
 	}

@@ -105,7 +105,9 @@ class NewsController extends LoginController {
 		$getAllRecordNews= $this->bangnews;
 		$getAllRecordHot= $this->bangnews->where('hot',1);
 		$getAllRecordThuong= $this->bangnews->where('hot',1);
-		return View::make('/admin/dashboard', compact('getAllRecordNews','getAllRecordHot','getAllRecordThuong'));
+
+		$getAllRecordUser = User::where('role', 1)->first();
+		return View::make('/admin/dashboard', compact('getAllRecordNews','getAllRecordUser','getAllRecordHot','getAllRecordThuong'));
 		// 	$featured           = $getAllRecordNews->where('hot', '=', 0);
 		// 	return View::make('/admin/dashboard', compact('getAllRecordNews'));
 		// }

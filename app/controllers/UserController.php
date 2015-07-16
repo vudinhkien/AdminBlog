@@ -6,20 +6,39 @@ class UserController extends LoginController {
 		$this->banguser = $user;
 	}
 
+	public function getFormIndex() {
 
+		return View::make('/index');
+	}
 	/**
 	 * Form login
 	 * 
 	 * @return View
 	 */
 	public function getFormLogin() {
+
 		return View::make('/admin/login');
 	}
+	
+	public function logOut() {
+		//Auth::logout();
+		Session::forget('userId');
+		return View::make('/admin/login');
+	}
+	
+	public function getFormProfile() {
+		return View::make('/admin/profile');
+	} 
+
 	public function getIndex() {
 		return View::make('/admin/index');
 	}
 	public function login(){
-	return User::testLogin(Input::get('email'), Input::get('password'));
+		// if(Input::has('rememberMe')) { check remember
+  //      $lifetime = time() + 1440 * 60; // one day
+  //      Config::set('session.lifetime', $lifetime);
+
+		return User::testLogin(Input::get('email'), Input::get('password'));
 	}
 
 	public function getFormGioithieu() {

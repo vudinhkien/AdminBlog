@@ -34,7 +34,7 @@ class News extends Eloquent{
 		return $this->where('id',$id)->first()->delete();
 	}
 
-	public function getPaginated($limit = 25, array $receiveArray = array()) {
+	public function getPaginated($limit = 125, array $receiveArray = array()) {
 	$keyword = array_get($receiveArray, 'keyword');		
 	$query = News::whereRaw(1)// tương đương với select * from sinhvien
 			->join('category_news', 'news.cat_id', '=', 'category_news.cat_id');
