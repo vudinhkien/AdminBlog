@@ -12,6 +12,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public $timestamps=false;
 
+	protected $guarded = array();//test
+
 	/**
 	 * thuc thi insert - update
 	 * 
@@ -29,6 +31,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		$user->password = Hash::make(array_get($data, 'password'));
 		$user->name     = array_get($data, 'name');
 		$user->address  = array_get($data, 'address');
+		$user->role     = array_get($data, 'role');//array_get($data, 'role') -> input name="role"
 		return $user->save();
 	}
 
@@ -45,11 +48,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public static function testLogin($email, $password) {
 		$formUser = array(
 			'email'    => $email,
-			'password' => $password
+			'password' => $password,
+			'role'     =>1
 		);
 
 		$rules = array(
-			'email'    => "required",
+			'email'    => "required",//input email
 			'password' => 'required'
 		);
 
@@ -67,10 +71,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		}			
 		else {
 			// Vao db lay thong tin, so sanh neu ok thi dang nhap, k ok thi lại thong bao cho nguoi dung
-		   if(Auth::attempt($formUser)) {//bắt buộc để so sánh với email csdl
-		   	// Redirect sang danh sach sinh vien
+		   if(Auth::attempt($formUser)) {             //bắt buộc để so sánh với email csdl
+		   	// Redirect sang trang chủ admin
+		   	Session::set("Role", Auth::user()->role);
 				Session::set("userId", Auth::user()->id);
-
+				Session::set("name", Auth::user()->name);
+				Session::set("email", Auth::user()->email);
+				Session::set("phone", Auth::user()->phone);
+				Session::set("address", Auth::user()->address);
+				//      if(Input::has('rememberMe')) { check remember
+			   //      $lifetime = time() + 1440 * 60; // one day
+			   //      Config::set('session.lifetime', $lifetime);
 		   	return Redirect::to('admin/index');
 		   } else {
 		   	return Redirect::back()->withInput()->with('error', 'Email hoặc mật khẩu không chính xác');
@@ -93,4 +104,5 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 		return $query->paginate($limit);
 	}
+
 }//end class User

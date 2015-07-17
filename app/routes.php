@@ -1,12 +1,15 @@
 <?php
-
-Route::group(array('prefix' => 'admin'), function()
+Route::get('/admin', 'UserController@getFormLogin');
+Route::post('admin/actionCheckLogin','UserController@login');
+Route::group(array('prefix' => 'admin','before' =>'checkLoginNew'), function()
  {
- 	Route::get('/', 'UserController@getFormLogin');
- 	Route::post('/actionCheckLogin','UserController@login');// url: /bat den action cua form đăng ký vào hàm take-data-view
+ 	// url: /bat den action cua form đăng ký vào hàm take-data-view
 	Route::get('/index', 'UserController@getIndex');
 	Route::get('/dashboard', 'NewsController@getDashboard');//thống kê News
- 	
+	Route::get('/logout', 'UserController@logOut');//thống kê News
+	Route::get('/profile', 'UserController@getFormProfile');//thống kê News
+ 
+ 
 	Route::get('/themuser', 'UserController@getFormThemUser');
 	Route::post('/dangkyuser', 'UserController@DangkyUser');
 	Route::get('/showuser', 'UserController@getAllUser');
@@ -25,6 +28,12 @@ Route::group(array('prefix' => 'admin'), function()
 	Route::get('gui-id-cat/{id}',['as' => 'sendIdCat','uses' => 'CategoryController@getEditCat']);
  	Route::post('/actioncategory', 'CategoryController@ThemCategory');
  	Route::post('/delete-cat', 'CategoryController@DeleteCat');
+ });
+Route::group(array('prefix' => '/'), function()  //truy cap vao front-end http://192.168.33.10:8072/
+ {
+ 	Route::get('/', 'IndexController@getFormIndex'); 
+ 	Route::get('/gui-id-dep/{id}/', ['as' => 'frontendIdDep', 'uses' => 'IndexController@getIdDep']);
+ 	///gui-id-dep/{id}  thì sang getIdDep($id) ko cần lấy $id = input::get('dep_id') về ở IndexController
+ 	Route::get('/gui-id-news/{id}/', ['as' => 'frontendIdNews', 'uses' => 'IndexController@getIdNews']);
 
  });
-

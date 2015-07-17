@@ -66,7 +66,7 @@
 				<label class="col-md-3 control-label" for="example-select">Danh mục</label>
 				<div class="col-md-6">
 					   <select id="example-select" name="cat_id" class="form-control" size="1">
-							<option value="0">Bộ Phận</option>
+							<option value="0">Không có sự lựa chọn</option>
 								@foreach ($cats as $cat)
 
 	                     <option value="{{ $cat->cat_id }}" 
@@ -78,6 +78,24 @@
 					   </select>
 				</div>
 			</div>
+
+			<div class="form-group">
+				<label class="col-md-3 control-label" for="example-select">Phòng Ban</label>
+				<div class="col-md-6">
+					   <select id="example-select" name="dep_id" class="form-control" size="1">
+							<option value="0">Bộ Phận</option>
+								@foreach ($dep as $val)
+
+	                     <option value="{{ $val->dep_id }}" 
+	                     	{{ $edit->dep_id == $val->dep_id ? 'selected' : '' }}
+	                     >
+									{{ $val->dep_name }}
+	                     </option>
+								@endforeach
+					   </select>
+				</div>
+			</div>
+
 			<div class="form-group">
 				<label class="col-md-3 control-label">Loại tin</label>
 				<div class="col-md-9">

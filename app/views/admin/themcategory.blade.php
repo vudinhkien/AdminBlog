@@ -66,11 +66,11 @@
 				</ul>   
 			@endif
 			@if($sucess = Session::get('bao_thanh_cong'))
-					{{ $sucess }}
-				@endif
+				{{ $sucess }}
+			@endif
 
-				@if($error = Session::get('bao_loi'))
-					{{ $error }}
+			@if($error = Session::get('bao_loi'))
+				{{ $error }}
 			@endif
 	</div>
 </div>

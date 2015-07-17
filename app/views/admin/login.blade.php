@@ -2,26 +2,47 @@
 <html>
 <head>
 	<title>Login</title>
-	<link rel="stylesheet" href="{{Asset('assets/css/bootstrap.min.css')}}"/>
-	<link rel="stylesheet" href="{{Asset('assets/css/style.css')}}"/>
+	<link rel="stylesheet" href="{{Asset('assets/css-admin/font-awesome.min.css')}}"/>
+	<link rel="stylesheet" href="{{Asset('assets/css-admin/bootstrap.min.css')}}"/>
+	<link rel="stylesheet" href="{{Asset('assets/css-admin/style.css')}}"/>
 </head>
-<body>
-<div class="containner">
+<body class="bodylogin">
+<div class="container">
 	<div class="row login">
-		
-		<fieldset>
-			<legend> ĐĂNG NHẬP </legend>
-				<form action="{{ asset('admin/actionCheckLogin') }}" method="post">
-					{{ Form::token() }} <!-- bắt buộc có -->
-					Tài Khoản
-					<input type="text" name="email" value="{{ Input::old('email') }}" id="username" class="form-control">
-					Mật Khẩu
-					<input type="password" name="password" value="{{ Input::old('password') }}" id="password" class="form-control">
-					<button type="submit" class="btn btn-effect-ripple btn-primary">Đăng Nhập</button>
-					<button type="reset" class="btn btn-effect-ripple btn-danger">Hủy Bỏ</button>
-				</form>
-		</fieldset>
-	</div>
+      <div class=" col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3  col-md-5 col-md-offset-4 col-lg-4 col-lg-offset-4">
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               <h3 class="panel-title text-center">Đăng nhập</h3>
+            </div>
+            <div class="panel-body">
+               <form accept-charset="UTF-8" role="form" id="login_form" action="{{ asset('admin/actionCheckLogin') }}" method="post">
+               	{{ Form::token() }}
+                  <fieldset>
+                     <div class="form-group input-group">
+                        <div class="input-group-addon">
+                           <i class="fa fa-user"></i>
+                        </div>
+                        <input class="form-control" placeholder="Email" name="email" value="{{ Input::old('email') }}" id="email" type="text" />
+                     </div>
+                     <div class="form-group input-group">
+                        <div class="input-group-addon">
+                           <i class="fa fa-unlock"></i>
+                        </div>
+                        <input class="form-control" placeholder="Password" name="password" type="password" value="{{ Input::old('password') }}" id="password" />
+                     </div>
+                     <div class="form-group">
+                        <label>
+                           <input name="remember" type="checkbox" value="1" class="minimal-blue">
+                            Remember Me
+                        </label>
+                     </div>
+                     <input type="submit" class="btn btn-primary btn-block btn-md btn-responsive" value="Login" id="btnSubmit" name="btnSubmit">
+                  </fieldset>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
 	<p class="thongbao">
 		@if ( $errors->any() )
 		<ul>

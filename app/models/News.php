@@ -21,11 +21,12 @@ class News extends Eloquent{
 			$news->images       = $file->getClientOriginalName();
 		}
 		// End Upload images
-		$news->tomtat       = array_get($data, 'tomtat');
-		$news->content      = array_get($data, 'content');
-		$news->cat_id       = array_get($data, 'cat_id');
-		$news->hot          = array_get($data, 'hot');
-		$news->ngaydangbai   = date('Y-m-d H:i:s');
+		$news->tomtat      = array_get($data, 'tomtat');
+		$news->content     = array_get($data, 'content');
+		$news->cat_id      = array_get($data, 'cat_id');
+		$news->dep_id      = array_get($data, 'dep_id');
+		$news->hot         = array_get($data, 'hot');
+		$news->ngaydangbai = date('Y-m-d H:i:s');
 		return $news->save();
 	}
 
@@ -34,10 +35,11 @@ class News extends Eloquent{
 		return $this->where('id',$id)->first()->delete();
 	}
 
-	public function getPaginated($limit = 25, array $receiveArray = array()) {
+	public function getPaginated($limit = 125, array $receiveArray = array()) {
 	$keyword = array_get($receiveArray, 'keyword');		
-	$query = News::whereRaw(1)// tương đương với select * from sinhvien
-			->join('category_news', 'news.cat_id', '=', 'category_news.cat_id');
+	$query = News::whereRaw(1)                     // tương đương với select * from sinhvien
+			->join('category_news', 'news.cat_id', '=', 'category_news.cat_id')
+			->join('department', 'news.dep_id', '=', 'department.dep_id');
 		if($keyword) {
 			$query->where('title', 'LIKE', '%'. $keyword .'%')
 					->orWhere('content', 'LIKE', '%'. $keyword .'%');			      
