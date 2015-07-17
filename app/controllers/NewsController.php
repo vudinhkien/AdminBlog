@@ -10,22 +10,28 @@ class NewsController extends LoginController {
 
 		$cats = DB::table('category_news')
 				->get();
+		$dep = DB::table('department')
+				->get();
 		$edit = new Stdclass; //khởi tạo 1 mảng rỗng để truyền sang form 2 biến
 		$edit->title = '';
 		$edit->id = '';
 		$edit->images = '';
 		$edit->tomtat = '';
 		$edit->cat_id = '';
+		$edit->dep_id = '';
 		$edit->content = '';
 
-		return View::make('/admin/thembaiviet',compact('cats', 'edit'));
+		return View::make('/admin/thembaiviet',compact('cats', 'edit','dep'));
 	}
+
 	public function getEditNews($id)
 	{
 		$cats = DB::table('category_news')
 				->get();
+		$dep = DB::table('department')
+				->get();
 		$edit = $this->bangnews->find($id);	
-		return View::make('/admin/thembaiviet', compact('edit', 'cats'));
+		return View::make('/admin/thembaiviet', compact('edit', 'cats','dep'));
 	}
 
 
@@ -107,7 +113,7 @@ class NewsController extends LoginController {
 		$getAllRecordThuong= $this->bangnews->where('hot',1);
 
 		$getAllRecordUser = User::where('role', 1)->first();
-		return View::make('/admin/dashboard', compact('getAllRecordNews','getAllRecordUser','getAllRecordHot','getAllRecordThuong'));
+		return View::make('admin/dashboard', compact('getAllRecordNews','getAllRecordUser','getAllRecordHot','getAllRecordThuong'));
 		// 	$featured           = $getAllRecordNews->where('hot', '=', 0);
 		// 	return View::make('/admin/dashboard', compact('getAllRecordNews'));
 		// }

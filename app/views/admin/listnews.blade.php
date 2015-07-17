@@ -14,6 +14,7 @@
 						<th>Ảnh</th>
 						<th>Mô tả ngắn</th>
 						<th>Danh Mục</th>
+						<th>Bộ Phận</th>
 						<th>Sửa</th>
 						<th>Xóa</th>
 					</tr>
@@ -35,6 +36,7 @@
 							<td><img width="200" src="/upload/{{ $val->images }}"></td>
 							<td> {{ $val->tomtat }} </td>
                 		<td>{{ $val->cat_name }}</td>
+                		<td>{{ $val->dep_name }}</td>
 
 						 	<form action="{{ asset('admin/delete-news') }}" method="post">
 			               <td class="numeric">

@@ -31,5 +31,9 @@ Route::group(array('prefix' => 'admin','before' =>'checkLoginNew'), function()
  });
 Route::group(array('prefix' => '/'), function()  //truy cap vao front-end http://192.168.33.10:8072/
  {
- 	Route::get('/', 'UserController@getFormIndex'); 
+ 	Route::get('/', 'IndexController@getFormIndex'); 
+ 	Route::get('/gui-id-dep/{id}/', ['as' => 'frontendIdDep', 'uses' => 'IndexController@getIdDep']);
+ 	///gui-id-dep/{id}  thì sang getIdDep($id) ko cần lấy $id = input::get('dep_id') về ở IndexController
+ 	Route::get('/gui-id-news/{id}/', ['as' => 'frontendIdNews', 'uses' => 'IndexController@getIdNews']);
+
  });

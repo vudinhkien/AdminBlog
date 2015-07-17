@@ -1,3 +1,6 @@
+@extends('index')
+@section('content')
+@if(!isset($getNewsById))
 <div id="calltoaction">
 	<div class="jumbotron">
 		<div class="container">
@@ -8,26 +11,19 @@
 		</div>
 	</div>
 </div>
+			
 <div id="feature1">
    <div class="container">
 		<div class="row bophan">
-			<div class="col-sm-4">
-			   <i class="fa fa-bullseye"></i>
-			   <h3>Marketing</h3>
-			   <p>Chia sẻ cá nhân .......</p>
+			@foreach($getData as $val)
+			<div class="col-sm-3">
+				<a href="{{ route('frontendIdDep',[$val->dep_id]) }}">
+					{{ $val->icon }}
+			   	<h3>{{ $val->dep_name }} </h3>
+				</a>
+			   <p>{{ $val->comment }} </p>
 			</div>
-
-			<div class="col-sm-4">
-			   <i class="fa fa-laptop"></i>
-			   <h3>IT</h3>
-			   <p>Chia sẻ cá nhân .......</p>
-			</div>
-
-			<div class="col-sm-4">
-			   <i class="fa fa-street-view"></i>
-			   <h3>Chăm sóc khách hàng</h3>
-			   <p>Chia sẻ cá nhân .......</p>
-			</div>
+			@endforeach
 		</div>
 	</div>
 </div>
@@ -36,34 +32,14 @@
    <div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<h2>TAOBAO - BLOG</h2>
-				<p class="lead">Lính mới ơi - kiến thức dành cho bạn</p>
+				<h2>SLIDE - BLOG</h2>
+				<p class="lead">Ảnh chạy</p>
 			</div>
 		</div>
    </div>
 </div>
-
 <div id="feature3">
-   <div class="container">
-		<div class="row">
-			<div class="col-sm-6 col-sm-push-6">
-				<img src="{{ Asset('assets/img/p1.jpg') }}" class="img-circle img-responsive center-block" alt=""/>
-			</div>
-			<div class="col-sm-6 col-sm-pull-6">
-				<h3 class="text-center">GET STARTED FOR NEW MEMBERS</h3>
-				<p class="lead">Chia sẻ kiến thức lập trình </p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6">
-				<img src="{{ Asset('assets/img/p1.jpg') }}" class="img-circle img-responsive center-block" alt=""/>
-			</div>
-			<div class="col-sm-6">
-				<h3 class="text-center">ADVANCE KNOWLEDGE</h3>
-				   <p class="lead">  kiến thức nâng cao lập trinh</p>
-			</div>
-		</div>
-   </div>
+	@yield('newsbydep') 
 </div>
 
 <div id="feature4">
@@ -81,3 +57,27 @@
 		</div>
    </div>
 </div>
+@else {{-- nếu tồn tại id của news thì thành trang news chi tiết --}}
+	<div class="container">
+		@foreach($getNewsById as $val)
+			<div class="row newsdetail">
+				<h3>{{ $val->title }}</h3>
+				<span>
+					<?php 
+						$date_int = strtotime( $val->ngaydangbai);
+						$time_vietnam = date('d-m-Y', $date_int );
+						echo $time_vietnam;  
+					?>
+				</span>
+				<p class ="tomtat">{{ $val->tomtat }}</p>
+				<img src="/upload/{{ $val->images }}" alt=""/>
+				<p class ="content">{{ $val->content }}</p>
+			</div>
+			<!--comentface-->
+	      <div style="border:#CCC solid 1px;width:715px" class="fb-comments" 
+	      data-href="#" data-numposts="5" data-colorscheme="light"></div>
+	      </div>
+		@endforeach
+	</div>
+@endif
+@endsection

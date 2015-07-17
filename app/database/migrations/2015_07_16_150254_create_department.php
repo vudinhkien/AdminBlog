@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBlog extends Migration {
+class CreateDepartment extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,13 @@ class CreateBlog extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create("blog",function($table) {
-			$table->increments("id");
-			$table->text("tenbaiviet");
-			$table->date("ngayviet");
-			$table->text("phongban");
+		Schema::create("department",function($table) {
+			$table->increments("dep_id");
+			$table->text("dep_name");
+			$table->integer("position");
+			$table->integer("comment");
+			$table->text("icon");
+			$table->tinyInteger("home");
 			$table->timestamps();
 		});
 	}

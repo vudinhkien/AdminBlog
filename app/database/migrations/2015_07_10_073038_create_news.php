@@ -19,6 +19,7 @@ class CreateNews extends Migration {
 		$table->text('tomtat');
 		$table->longText('content');
 		$table->integer('cat_id');
+		$table->integer('dep_id');
 		$table->tinyInteger('hot');
 		$table->date('ngaydangbai');
 		$table->timestamps();
@@ -32,7 +33,7 @@ class CreateNews extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('news');
 	}
 
 }

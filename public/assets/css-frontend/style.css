@@ -1,3 +1,6 @@
+a:hover{
+    text-decoration: none;
+}
 @font-face {
     font-family: 'Pacifico';
     src:url('../font/Pacifico.ttf');
@@ -90,4 +93,32 @@ footer a{
 
 .bophan i{
     font-size: 50px
+}
+.content-newsbydep{
+    padding-top: 40px;
+}
+.text-center a{
+    font-weight: bold;
+}
+.title-tintuc img{
+    width: 500px;
+    height: 330px;
+}
+.newsdetail{
+    margin-top: 100px
+}
+.newsdetail h3{
+color: #337ab7;
+font-size: 30px;
+font-weight: bold;
+}
+.newsdetail .tomtat{
+    font-weight: bold;
+    font-size: 16px;
+    margin-top:10px;
+}
+.newsdetail img{
+    width: 500px;
+    height: 330px;
+    margin-left: 300px;
 }
